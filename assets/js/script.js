@@ -20,18 +20,31 @@
 for (var i = 1; i < 9; i++) {
     $(".container-fluid").append(
         `<div class ="row">
-            <div class="col-2 p-0">
+            <div class="col-2 p-0 border border-dark border-right-0">
             Time
             </div>
-            <div class="col-8 p-0">
+            <div class="col-8 p-0 border border-dark">
                 <ul class="list-group">
                     <li class="list-group-item p-0">Blah</li>
                 </ul>           
             </div>
-            <div class="saveBtn col-2 p-0">
+            <div class="saveBtn col-2 p-0 border border-dark">
             </div>
         </div>`)
 }
+
+$(".list-group").on("click", "li", function() {
+    var text = $(this)
+      .text()
+      .trim();
+      var textInput = $("<textarea>")
+      
+      .val(text);
+      $(this).replaceWith(textInput);
+      textInput.trigger("focus");
+      
+  
+  });
 
 var currentDay = function() {
     var currentDayEl = $('#currentDay.lead');
