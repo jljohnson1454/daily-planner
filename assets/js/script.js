@@ -3,49 +3,9 @@
 // var taskLiEl = $(".list-group").append('<li class="list-group-item"></li>');
 // var saveButtonEl = $('.container-fluid').append('<button id="save" class="saveBtn">Save</button>');
 
-// $(".container-fluid").append(
-//     `<div class ="row">
-//         <div class="col-2 p-0">
-//         Time
-//         </div>
-//         <div class="col-8 p-0">
-//             <ul class="list-group">
-//                 <li class="list-group-item p-0">Blah</li>
-//             </ul>           
-//         </div>
-//         <div class="saveBtn col-2 p-0">
-//         </div>
-//     </div>`)
+var timeofDay = ["9AM","10AM","11AM","12PM", "1PM", "2PM", "3PM", "4PM", "5PM"] 
 
-for (var i = 1; i < 9; i++) {
-    $(".container-fluid").append(
-        `<div class ="row">
-            <div class="col-2 p-0 border border-dark border-right-0">
-            Time
-            </div>
-            <div class="col-8 p-0 border border-dark">
-                <ul class="list-group">
-                    <li class="list-group-item p-0">Blah</li>
-                </ul>           
-            </div>
-            <div class="saveBtn col-2 p-0 border border-dark">
-            </div>
-        </div>`)
-}
-
-$(".list-group").on("click", "li", function() {
-    var text = $(this)
-      .text()
-      .trim();
-      var textInput = $("<textarea>")
-      
-      .val(text);
-      $(this).replaceWith(textInput);
-      textInput.trigger("focus");
-      
-  
-  });
-
+// Current time
 var currentDay = function() {
     var currentDayEl = $('#currentDay.lead');
     var today = moment().format('LLL');
@@ -53,11 +13,71 @@ var currentDay = function() {
     $(currentDayEl).html(today);
     };
 
+// Time Blocks
+    for (var i = 1; i < 9; i++) {
 
-var taskList = function () {
-
-
+        $(".container-fluid").append(
+            `<div class ="row">
+                <div id=time class="col-2 m-0 p-0 border border-dark border-right-0">
+                    ${timeofDay[i]}
+                </div>
+                <div class="col-8 p-0 border border-dark">
+                    <ul class="list-group">
+                        <li class="list-group-item p-0">Blah</li>
+                    </ul>           
+                </div>
+                <div class="saveBtn col-2 p-0 border border-dark">
+                <span class="oi oi-hard-drive"></span>
+                </div>
+            </div>`)      
 }
+
+
+//Edit Text in Time Blocks
+
+$(".list-group").on("click", "li", function() {
+    var text = $(this)
+      .text()
+      .trim();
+      var textInput = $("<textarea>")
+      .addClass("form-control")
+      .val(text);
+      $(this).replaceWith(textInput);
+      textInput.trigger("focus");
+      });
+
+$(".list-group").on("blur", "textarea", function() {
+    var text=$(this)
+        .val()
+        .trim();
+
+    var status = $(this)
+        .closest(".list-group")
+        .attr("id")
+        .replace("list-", "");
+    
+    var index = $(this)
+        .closest(".list-group-item")
+        .index();
+})
+
+
+// Load tasks from local storage
+// var loadTasks = function() {
+    // localStorage.getItem("timeofDay")
+//}
+
+
+// Save button in local storage
+$(".saveBtn").on("click", function(){
+    
+})
+
+// var saveTasks = function() {
+    //localStorage.setItem("timeofDay")
+//}
+
+
 
 
 
@@ -76,28 +96,3 @@ var taskList = function () {
 
     //When I refresh the page, the saved events still exist
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-currentDay();
