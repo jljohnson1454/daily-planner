@@ -71,23 +71,24 @@ var timeBlocks = function() {
 
                 $(".container-fluid").append(
                     `<div class ="row">
-                        <div id=time class="hour col-1 m-0 p-0 border border-dark border-right-0 rounded-left">
+                        <div id=time class="hour col-1 m-0 p-0 border border-dark border-right-0 border-left-0">
                             ${timeofDay[i].hour}
                         </div>
-                        <textarea id=${timeofDay[i].military} class="textArea col-10 p-0 border border-dark"></textarea>
+                        <textarea id=${timeofDay[i].military} hour=${timeofDay[i].hour} class="textArea col-10 p-0 border border-dark"></textarea>
                         <button class="btn saveBtn col-md-1"><i class="fas fa-save"></i></button>
                     </div>`)
         }
+        saveTasks();
      }
 
 
 // Checking times for Past, Present, and Future events
 $(document).ready(function(){
 
-    // Loop through each div element with the class box
+    // Loop through each div element with the textarea
     $("textarea").each(function(){
 
-        // Test if the div element is empty
+        
         if($(this).attr("id") == moment().format('HH')) {
                     $(this).addClass("present")
             } else if($(this).attr("id") < moment().format('HH')){
@@ -98,14 +99,19 @@ $(document).ready(function(){
     });
 });
 
+var saveTasks = function() {
+
+
 $(".saveBtn").on("click", function(){
+
     console.log("string")
-    var textValue = $(this).siblings("#9").val();
-    var timeValue = $(this).siblings("#9").attr("hour");
+    var textValue = $(this).siblings("textarea").val();
+    var timeValue = $(this).siblings("textarea").attr("hour");
 
     localStorage.setItem(timeValue, textValue);
 
 })
+}
 
 function loadStorage() {
     var array = [9,10,11,12,1,2,3,4,5];
