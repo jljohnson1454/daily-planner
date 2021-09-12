@@ -1,10 +1,5 @@
-// var taskRowEl = $('.container-fluid').append('<div class="row"></div>');
-// var taskUlEl = $('.row').append('<ul class = "list-group"></ul>');
-// var taskLiEl = $(".list-group").append('<li class="list-group-item"></li>');
-// var saveButtonEl = $('.container-fluid').append('<button id="save" class="saveBtn">Save</button>');
 
-// var timeofDay = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"]
-
+// Created an array to hold both military and regular time
 var timeofDay = [
 {
     id: "9",
@@ -119,32 +114,6 @@ function loadStorage() {
         $("textarea[hour='" + e + "']").val(localStorage.getItem(e));
     })
 }
-
-// checkTimes = function() {
-        
-//     for (var i = 0; i < 9; i++) {
-//         console.log(typeof(timeofDay[i].military))
-//         console.log(typeof(moment().format('HH')))
-//     if(timeofDay[i].military == moment().format('HH')) {
-//         $('').addClass("present")
-//     } else if(timeofDay[i].military < moment().format('HH')){
-//         $('.textArea').addClass("past")
-//     } else if(timeofDay[i].military > moment().format('HH')) {
-//         $('.textArea').addClass("future")
-//     }}
-// }
-
-//Edit Text in Time Blocks
-// $("div").on("click", function(e) {
-//     if(e.target.getAttribute('id') === 'textArea'){
-//       var textInput = $("<textarea>")
-//       .addClass("col-md-10 description")
-//       $(e.target).replaceWith(textInput);
-//       textInput.trigger("focus");
-//     }
-//       });
-
-// Save button in local storage
 
 timeBlocks();
 loadStorage();
