@@ -7,112 +7,105 @@
 
 var timeofDay = [
 {
-    military: "9",
-    hour: "9",
-    meridiem:"am"},
+    id: "9",
+    military: "09",
+    hour: "9am",
+},
 {
+    id: "10",
     military: "10",
-    hour:"10",
-    meridiem:"am"},
-{
+    hour:"10am",
+    
+},
+{   
+    id:"11",
     military: "11",
-    hour:"11",
-    meridiem:"am"
+    hour:"11am",
+    
 },
 {
+    id: "12",
     military: "12",
-    hour:"12",
-    meridiem:"pm"
+    hour:"12pm",
+    
 },
-{
+{   
+    id: "1",
     military: "13",
-    hour:"1",
-    meridiem:"pm"},
+    hour:"1pm",
+},
 {
+    id: "2",
     military: "14",
-    hour:"2",
-    meridiem:"pm"},
+    hour:"2pm",
+},
 {
+    id: "3",
     military: "15",
-    hour:"3",
-    meridiem:"pm"
+    hour:"3pm",
+    
 },
-{
+{   
+    id: "4",
     military: "16",
-    hour:"4",
-    meridiem:"pm"
+    hour:"4pm",
+    
 },
-{
+{   
+    id: "5",
     military: "17",
-    hour:"5",
-    meridiem:"pm"
+    hour:"5pm",
+
 }]
 
 // Current time
 
-    var currentDayEl = $('#currentDay.lead');
+    var currentDayEl = $('#currentDay');
     var today = moment().format('LLL');
 
     $(currentDayEl).html(today);
 
-// Time Blocks
-    for (var i = 0; i < 9; i++) {
+// Function to create time blocks
+var timeBlocks = function() {
+        for (var i = 0; i < 9; i++) {
 
-        $(".container-fluid").append(
-            `<div class ="row">
-                <div id=time class="hour col-1 m-0 p-0 border border-dark border-right-0 rounded-left">
-                    ${timeofDay[i].hour}
-                </div>
-                <div id=textArea class="col-10 p-0 border border-dark"></div>
-                <button class="btn saveBtn col-md-1"><i class="fas fa-save"></i></button>
-            </div>`)    
+                $(".container-fluid").append(
+                    `<div class ="row">
+                        <div id=time class="hour col-1 m-0 p-0 border border-dark border-right-0 rounded-left">
+                            ${timeofDay[i].hour}
+                        </div>
+                        <textarea id=${timeofDay[i].military} class="textArea col-10 p-0 border border-dark"></textarea>
+                        <button class="btn saveBtn col-md-1"><i class="fas fa-save"></i></button>
+                    </div>`)
         }
+     }
 
 
-//Edit Text in Time Blocks
+// Checking times for Past, Present, and Future events
+$(document).ready(function(){
 
-$("div").on("click", function(e) {
-    if(e.target.getAttribute('id') === 'textArea'){
-      var textInput = $("<textarea>")
-      .addClass("col-md-10 description")
-      $(e.target).replaceWith(textInput);
-      textInput.trigger("focus");
-    }
-      });
+    // Loop through each div element with the class box
+    $("textarea").each(function(){
 
+        // Test if the div element is empty
+        if($(this).attr("id") == moment().format('HH')) {
+                    $(this).addClass("present")
+            } else if($(this).attr("id") < moment().format('HH')){
+                    $(this).addClass("past")
+            } else if($(this).attr("id") > moment().format('HH')) {
+                    $(this).addClass("future")
+        }    
+    });
+});
 
-// Past, Present, Future color coding
-if(timeofDay < moment().format("HH")) {
-    $('#textArea').addClass("past");
-} else if(timeofDay > moment().format("HH")){
-    $('#textArea').addClass("future");
-} else if(timeofDay === moment().format("HH")) {
-    $('#textArea').addClass("future");
-}
-
-
-// Load tasks from local storage
-// var loadTasks = function() {
-    // localStorage.getItem("timeofDay")
-//}
-
-
-// Save button in local storage
 $(".saveBtn").on("click", function(){
+    console.log("string")
+    var textValue = $(this).siblings("#9").val();
+    var timeValue = $(this).siblings("#9").attr("hour");
 
-    var textValue = $(this).siblings("#textArea").val();
-    var timeValue = $(this).siblings("#textArea").attr("hour");
-
-    localStorage.setItem(timeValue, textValue)
+    localStorage.setItem(timeValue, textValue);
 
 })
-
-localStorage.getItem(11)
-
-
-    var saveTasks = function() {
-    localStorage.setItem("timeofDay",)
-}
 
 function loadStorage() {
     var array = [9,10,11,12,1,2,3,4,5];
@@ -121,6 +114,31 @@ function loadStorage() {
     })
 }
 
+// checkTimes = function() {
+        
+//     for (var i = 0; i < 9; i++) {
+//         console.log(typeof(timeofDay[i].military))
+//         console.log(typeof(moment().format('HH')))
+//     if(timeofDay[i].military == moment().format('HH')) {
+//         $('').addClass("present")
+//     } else if(timeofDay[i].military < moment().format('HH')){
+//         $('.textArea').addClass("past")
+//     } else if(timeofDay[i].military > moment().format('HH')) {
+//         $('.textArea').addClass("future")
+//     }}
+// }
 
+//Edit Text in Time Blocks
+// $("div").on("click", function(e) {
+//     if(e.target.getAttribute('id') === 'textArea'){
+//       var textInput = $("<textarea>")
+//       .addClass("col-md-10 description")
+//       $(e.target).replaceWith(textInput);
+//       textInput.trigger("focus");
+//     }
+//       });
 
+// Save button in local storage
+
+timeBlocks();
 loadStorage();
