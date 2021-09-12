@@ -114,7 +114,7 @@ $(".saveBtn").on("click", function(){
 }
 
 function loadStorage() {
-    var array = [9,10,11,12,1,2,3,4,5];
+    var array = ["9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm"];
     array.forEach(function(e){
         $("textarea[hour='" + e + "']").val(localStorage.getItem(e));
     })
