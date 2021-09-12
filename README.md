@@ -12,12 +12,12 @@ The purpose of this assignment was to update existing starter code to provide an
 -Moment.JS
 
 ## Website URLs
-Live Website: 
+Live Website: https://jljohnson1454.github.io/daily-planner/
 
-Github Repo: 
+Github Repo: https://github.com/jljohnson1454/daily-planner
 
 ## Screenshot
-![screenshot]()
+![screenshot](./assets/screenshot.png)
 
 ## References
 Bootcamp Module 5 Activities
